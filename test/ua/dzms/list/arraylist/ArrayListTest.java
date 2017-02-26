@@ -1,15 +1,22 @@
-package test.ua.dp.arraylist;
+package ua.dzms.list.arraylist;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.dp.arraylist.ArrayList;
+import ua.dzms.list.ListTest;
 
 
 import static org.junit.Assert.*;
 
-public class ArrayListTest {
-    ArrayList arrayList;
+public class ArrayListTest extends ListTest {
+//    ArrayList arrayList;
 
+    @Override
+    public void before() {
+        list = new ArrayList<>();
+        super.before();
+    }
+
+/*
     @Before
     public void before() {
         arrayList = new ArrayList();
@@ -19,7 +26,7 @@ public class ArrayListTest {
         arrayList.add(3333);
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testGet() {
         for (int i = 0; i < 5; i++){
             assertEquals(i*1111, arrayList.get(i));
@@ -36,7 +43,7 @@ public class ArrayListTest {
         assertEquals(beforAdd, afterAdd - 1);
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testAddWithParametr(){
         arrayList.add(1111, 0);
         assertEquals(1111, arrayList.get(0));
@@ -75,7 +82,7 @@ public class ArrayListTest {
         arrayList.add(7777, arrayList.size() + 1);
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testRemoveIndex(){
         for (int i = 0; i < 5; i++) {
             assertEquals(i*1111, arrayList.remove(0));
@@ -99,7 +106,7 @@ public class ArrayListTest {
 
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = IllegalArgumentException.class)
     public  void testRemoveObject(){
         arrayList.remove((Object) 3333);
         assertEquals(0, arrayList.get(0));
@@ -107,7 +114,6 @@ public class ArrayListTest {
         assertEquals(2222, arrayList.get(2));
         assertEquals(4444, arrayList.get(3));
         assertEquals(3333, arrayList.get(4));
-        assertEquals(null, arrayList.get(5));
         assertEquals(5, arrayList.size());
 
         arrayList.remove((Object) 2222);
@@ -115,30 +121,18 @@ public class ArrayListTest {
         assertEquals(1111, arrayList.get(1));
         assertEquals(4444, arrayList.get(2));
         assertEquals(3333, arrayList.get(3));
-        assertEquals(null, arrayList.get(4));
-        assertEquals(null, arrayList.get(5));
         assertEquals(4, arrayList.size());
 
         arrayList.remove((Object) 3333);
         assertEquals(0, arrayList.get(0));
         assertEquals(1111, arrayList.get(1));
         assertEquals(4444, arrayList.get(2));
-        assertEquals(null, arrayList.get(3));
-        assertEquals(null, arrayList.get(4));
-        assertEquals(null, arrayList.get(5));
         assertEquals(3, arrayList.size());
 
         arrayList.remove((Object) 5555);
-        assertEquals(0, arrayList.get(0));
-        assertEquals(1111, arrayList.get(1));
-        assertEquals(4444, arrayList.get(2));
-        assertEquals(null, arrayList.get(3));
-        assertEquals(null, arrayList.get(4));
-        assertEquals(null, arrayList.get(5));
-        assertEquals(3, arrayList.size());
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testSet(){
         assertEquals(0, arrayList.get(0));
         assertEquals(1111, arrayList.get(1));
@@ -177,5 +171,5 @@ public class ArrayListTest {
         assertFalse(arrayList.contains(5555));
         assertFalse(arrayList.contains(null));
     }
-
+*/
 }

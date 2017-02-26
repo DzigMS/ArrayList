@@ -1,21 +1,20 @@
-package ua.dp.queue;
+package ua.dzms.list.queue;
 
-public class Queue {
-    private Node firstNode;
-    private Node lastNode;
+import ua.dzms.list.node.Node;
 
-    public Queue() {
-    }
+public class Queue<T> {
+    private Node<T> firstNode;
+    private Node<T> lastNode;
 
-    public Node getFirstNode() {
+    private Node<T> getFirstNode() {
         return firstNode;
     }
 
-    public Node getLastNode() {
+    private Node<T> getLastNode() {
         return lastNode;
     }
 
-    public void enqueue(Object object){
+    public void enqueue(T object){
         Node node = new Node(object);
         if (isEmpty()){
             lastNode = node;
@@ -26,11 +25,11 @@ public class Queue {
         }
     }
 
-    public Object dequeue(){
+    public T dequeue(){
         if (isEmpty()){
             throw new NullPointerException();
         }else {
-            Object object = firstNode.getValue();
+            T object = firstNode.getValue();
             firstNode = firstNode.getNextNode();
             return object;
         }

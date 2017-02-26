@@ -1,14 +1,13 @@
-package test.ua.dp.queue;
+package ua.dzms.list.queue;
 
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.dp.queue.Queue;
 import static org.junit.Assert.*;
 
 
 public class QueueTest {
-    Queue queue;
+    Queue<Object> queue;
 
     @Before
     public void before(){
@@ -21,23 +20,21 @@ public class QueueTest {
     @Test
     public void testEnqueue(){
         for (int i = 0; i < 3; i++) {
-            assertEquals((i+4)*1111, queue.getLastNode().getValue());
-            assertEquals(0, queue.getFirstNode().getValue());
             queue.enqueue((i+5)*1111);
-            assertEquals((i+5)*1111, queue.getLastNode().getValue());
-            assertEquals(0, queue.getFirstNode().getValue());
         }
+        for (int i = 0; i < 8; i++) {
+            assertEquals(i*1111, queue.dequeue());
+        }
+
+
     }
 
     @Test(expected = NullPointerException.class)
     public void testDequeue(){
         for (int i = 0; i < 5; i++) {
-            assertEquals(i*1111, queue.getFirstNode().getValue());
-            assertEquals(4444, queue.getLastNode().getValue());
-            queue.dequeue();
-            assertEquals((i+1)*1111, queue.getFirstNode().getValue());
-            assertEquals(4444, queue.getLastNode().getValue());
+            assertEquals(i*1111, queue.dequeue());
         }
+        queue.dequeue();
     }
 
     @Test
