@@ -2,15 +2,19 @@ package ua.dzms.list;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-abstract public class ListTest{
+abstract public class ListTest {
     public List<Object> list;
+
+    abstract List init();
 
     @Before
     public void before() {
+        list = init();
         for (int i = 0; i < 5; i++) {
             list.add(i * 1111);
         }
@@ -23,7 +27,7 @@ abstract public class ListTest{
         assertTrue(list.isEmpty());
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void testAddIndex() {
         assertEquals(5, list.size());
 
@@ -44,16 +48,22 @@ abstract public class ListTest{
         list.add(9999, 8);
         assertEquals(9999, list.get(8));
         assertEquals(9, list.size());
-
-        list.add(1010, 10);
-
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
+    public void testAddIndexException() {
+        list.add(1010, 10);
+    }
+
+    @Test
     public void testGet() {
         for (int i = 0; i < 5; i++) {
             assertEquals(i * 1111, list.get(i));
         }
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGetException() {
         list.get(5);
     }
 
@@ -81,7 +91,7 @@ abstract public class ListTest{
         assertEquals(-1, list.lastIndexOf(null));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void testSet() {
         assertEquals(0, list.get(0));
         assertEquals(1111, list.get(1));
@@ -89,10 +99,14 @@ abstract public class ListTest{
         list.set(3333, 0);
         assertEquals(3333, list.get(0));
         assertEquals(1111, list.get(1));
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testSetException() {
         list.set(7777, 7);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testRemoveObject() {
         list.remove((Object) 0);
         for (int i = 0; i < 4; i++) {
@@ -107,12 +121,16 @@ abstract public class ListTest{
         list.remove((Object) 4444);
         assertEquals(1111, list.get(0));
         assertEquals(2222, list.get(1));
-
-        list.remove((Object) 3333);
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void testRemoveIndex(){
+    @Test(expected = IllegalArgumentException.class)
+    public void testRemoveObjectException() {
+        list.remove((Object) 7777);
+    }
+
+
+    @Test
+    public void testRemoveIndex() {
         list.remove(0);
         for (int i = 0; i < 4; i++) {
             assertEquals((i + 1) * 1111, list.get(i));
@@ -126,7 +144,10 @@ abstract public class ListTest{
         list.remove(2);
         assertEquals(1111, list.get(0));
         assertEquals(2222, list.get(1));
+    }
 
-        list.remove( 3);
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testRemoveIndexException() {
+        list.remove(7);
     }
 }

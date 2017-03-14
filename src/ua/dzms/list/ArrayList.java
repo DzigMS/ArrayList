@@ -1,6 +1,5 @@
-package ua.dzms.list.arraylist;
+package ua.dzms.list;
 
-import ua.dzms.list.List;
 import java.util.Arrays;
 
 public class ArrayList<T> implements List<T> {
@@ -50,9 +49,9 @@ public class ArrayList<T> implements List<T> {
     @Override
     public void remove(T object) {
         int index = indexOf(object);
-        if (index != -1){
+        if (index != -1) {
             removeIndex(index);
-        }else {
+        } else {
             throw new IllegalArgumentException("Object is not found");
         }
     }
@@ -102,15 +101,14 @@ public class ArrayList<T> implements List<T> {
     }
 
     private void validate(int index) {
-        validateAdd(index);
-        if (index == size){
-            throw new IndexOutOfBoundsException();
+        if ((index < 0) || (index >= size)) {
+            throw new IndexOutOfBoundsException("Index must be between 0.." + size);
         }
     }
 
-    private void validateAdd(int index){
-        if (index > size) {
-            throw new IndexOutOfBoundsException();
+    private void validateAdd(int index) {
+        if ((index < 0) || (index > size)) {
+            throw new IndexOutOfBoundsException("LinkedList have only " + size + " elements");
         }
     }
 
@@ -126,9 +124,9 @@ public class ArrayList<T> implements List<T> {
         }
     }
 
-    private void removeIndex(int index){
+    private void removeIndex(int index) {
         System.arraycopy(array, index + 1, array, index, size - index - 1);
         array[--size] = null;
         resizeDown();
     }
- }
+}

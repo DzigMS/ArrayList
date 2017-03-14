@@ -1,4 +1,4 @@
-package ua.dzms.list.node;
+package ua.dzms.list;
 
 
 public class Node<T> {

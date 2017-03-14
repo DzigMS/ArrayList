@@ -1,4 +1,4 @@
-package ua.dzms.list.queue;
+package ua.dzms.queue;
 
 
 import org.junit.Before;
